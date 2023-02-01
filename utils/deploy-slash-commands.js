@@ -18,7 +18,7 @@ const rest = new REST({ version: '10' }).setToken(token);
 		const data = await rest.put(
             Routes.applicationCommands(clientId),
             { body: commands },
-        );        
+        );
 		console.log(`Successfully reloaded ${data.length} slash commands.`);
 	} catch (error) {
 		console.error(error);
