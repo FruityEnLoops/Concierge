@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const { gameTypes } = require('../constants/GameType');
 const { songlist } = require('../meta.json');
 const { getDefaults } = require('../utils/db.js')
+const { metaUrl } = require('../config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -19,7 +20,7 @@ module.exports = {
 			.setRequired(true)
 			.setAutocomplete(true)
 		)
-		.addIntegerOption(option =>
+		.addNumberOption(option =>
 			option.setName("score")
 			.setDescription("Score")
 			.setRequired(true)
@@ -51,11 +52,20 @@ module.exports = {
 			id: interaction.user.tag.replace("#", ""),
 			pseudo: defaults.pseudo,
 			song: interaction.options.getString("song"),
-			score: interaction.options.getInteger("score"),
+			score: interaction.options.getNumber("score"),
 			image: interaction.options.getAttachment("image").url,
 			alphanef: defaults.alphanef
 		};
-		await interaction.reply("POST endpoint?game=" + interaction.options.getString("jeu") + "\n```json\n" + JSON.stringify(score) + "\n```");
+		const submission = await fetch(`${metaUrl}?game=${interaction.options.getString("jeu")}`, {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(score)
+		})
+		if(submission.ok) {
+			await interaction.reply({ content: "Envoi du score réussi!", ephemeral: true});
+		} else {
+			await interaction.reply({ content: "Envoi du score échoué. Merci de réessayer plus tard!", ephemeral: true});
+		}
 	},
 	async autocomplete(interaction) {
 		interaction.respond(

@@ -2,7 +2,7 @@ module.exports = {
     gameTypes: [
         {
             name:"SOUND VOLTEX",
-            value:"sdvx"
+            value:"SDVX"
         },
         {
             name:"jubeat",
@@ -10,11 +10,11 @@ module.exports = {
         },
         {
             name:"ITG",
-            value:"itg"
+            value:"ITG"
         },
         {
             name:"pop'n music",
-            value:"popn"
+            value:"pop'n"
         },
         {
             name:"maimai",
