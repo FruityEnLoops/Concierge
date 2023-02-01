@@ -32,6 +32,22 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
+client.on(Events.InteractionCreate, interaction => {
+	if (!interaction.isAutocomplete()) return;
+	const command = interaction.client.commands.get(interaction.commandName);
+
+	if (!command) {
+		console.error(`Interaction didn't provide a command.`);
+		return;
+	}
+
+	try {
+		command.autocomplete(interaction);
+	} catch (error) {
+		console.error(error);
+	}
+});
+
 client.once(Events.ClientReady, c => {
 	console.log(`Concierge v${package.version} started.`);
 });
