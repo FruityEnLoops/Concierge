@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "deploy-slash": "node ./utils/deploy-slash-commands.js",
-    "fetch-meta": "node ./utils/fetch-meta.js"
+    "fetch-meta": "node ./utils/fetch-meta.js",
+    "init-db": "node ./utils/init-db.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/FruityEnLoops/Concierge#readme",
   "dependencies": {
-    "discord.js": "^14.7.1"
+    "discord.js": "^14.7.1",
+    "sqlite3": "^5.1.4"
   }
 }

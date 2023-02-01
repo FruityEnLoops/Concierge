@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS defaults (tag varchar PRIMARY KEY, alphanef int, pseudo varchar);
