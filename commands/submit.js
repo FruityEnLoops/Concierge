@@ -62,6 +62,14 @@ module.exports = {
 			body: JSON.stringify(score)
 		})
 		if(submission.ok) {
+			if(score.alphanef === 1) {
+				const scoreEmbed = new EmbedBuilder()
+					.addFields({
+						name: `Module : ${interaction.options.getString("jeu")}`,
+						value: `${interaction.user.username} à fait un score de ${interaction.options.getString("score")} sur ${interaction.options.getString("song")}.}`
+					})
+				interaction.client.channels.cache.get(announceChannel).send({ embeds: [scoreEmbed] });
+			}
 			await interaction.reply({ content: "Envoi du score réussi!", ephemeral: true});
 		} else {
 			await interaction.reply({ content: "Envoi du score échoué. Merci de réessayer plus tard!", ephemeral: true});

@@ -1,5 +1,6 @@
 {
     "token": "your token",
     "clientId": "your clientId",
-    "metaUrl": "URL to the challenges metadata file"
+    "metaUrl": "URL to the challenges metadata file",
+    "announceChannel": "channel ID to send alphanef scores to"
 }
