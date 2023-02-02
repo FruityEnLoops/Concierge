@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { gameTypes } = require('../constants/GameType');
 const { songlist } = require('../meta.json');
 const { getDefaults } = require('../utils/db.js')
