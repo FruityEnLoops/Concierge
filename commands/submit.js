@@ -35,14 +35,15 @@ module.exports = {
 			.setDescription("Score joué à l'Alphanef")
 			.setRequired(false)),
 	async execute(interaction) {
+		await interaction.deferReply({ ephemeral: true });
 		let defaults = await getDefaults(interaction.user.tag.replace("#", ""))
 		if(!defaults) {
-			interaction.reply({ content: "Merci d'utiliser la commande `/setup` pour configurer vos préférences d'envoi par défaut.", ephemeral: true })
+			interaction.editReply({ content: "Merci d'utiliser la commande `/setup` pour configurer vos préférences d'envoi par défaut.", ephemeral: true })
 			return;
 		}
 		if(!songlist.find(song => `${song.song} [${song.difficulty}]` === interaction.options.getString("song") &&
 			song.gametype === interaction.options.getString("jeu"))) {
-			interaction.reply({ content: "La song choisie est introuvable ou ne correspond pas au jeu choisi. Merci de bien vouloir revérifier la commande.", ephemeral: true });
+			interaction.editReply({ content: "La song choisie est introuvable ou ne correspond pas au jeu choisi. Merci de bien vouloir revérifier la commande.", ephemeral: true });
 			return;
 		}
 		if(interaction.options.getBoolean("alphanef") != null) {
@@ -70,9 +71,9 @@ module.exports = {
 					})
 				interaction.client.channels.cache.get(announceChannel).send({ embeds: [scoreEmbed] });
 			}
-			await interaction.reply({ content: "Envoi du score réussi!", ephemeral: true});
+			await interaction.editReply({ content: "Envoi du score réussi!", ephemeral: true});
 		} else {
-			await interaction.reply({ content: "Envoi du score échoué. Merci de réessayer plus tard!", ephemeral: true});
+			await interaction.editReply({ content: "Envoi du score échoué. Merci de réessayer plus tard!", ephemeral: true});
 		}
 	},
 	async autocomplete(interaction) {
